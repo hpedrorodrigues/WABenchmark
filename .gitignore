@@ -1,0 +1,10 @@
+### Folder
+
+.idea
+node_modules
+
+### File
+
+*.iml
+package-lock.json
+.DS_Store
