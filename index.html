@@ -15,40 +15,49 @@
 
 <body>
 <header class="cd-main-header">
-    <a href="#" class="cd-logo">WASM vs JS</a>
+    <a href="#" class="cd-logo">WASM vs JS perf tests</a>
     <a href="#" class="cd-nav-trigger">Menu<span></span></a>
 </header>
 
 <main class="cd-main-content">
     <nav class="cd-side-nav">
         <ul>
-            <li class="cd-label">Perf Tests</li>
-            <li class="overview">
-                <a href="#">Overview</a>
+            <li class="cd-label">Math</li>
+            <li>
+                <a href="src/tests/test.html" target="test-content">Add 2 vectors (Int32)</a>
             </li>
-            <li class="notifications">
-                <a href="#">Notifications</a>
+            <li>
+                <a href="src/tests/test.html" target="test-content">Add 2 vectors (Int64)</a>
             </li>
-            <li class="comments">
-                <a href="#">Comments</a>
+            <li>
+                <a href="src/tests/test.html" target="test-content">Add 2 vectors (Double)</a>
+            </li>
+            <li>
+                <a href="src/tests/test.html" target="test-content">Multiply 2 vectors (Int32)</a>
+            </li>
+            <li>
+                <a href="src/tests/test.html" target="test-content">Multiply 2 vectors (Int64)</a>
+            </li>
+            <li>
+                <a href="src/tests/test.html" target="test-content">Multiply 2 vectors (Double)</a>
+            </li>
+            <li>
+                <a href="src/tests/test.html" target="test-content">Fibonacci</a>
             </li>
         </ul>
         <ul>
-            <li class="cd-label">Sort Algorithms</li>
-            <li class="bookmarks">
-                <a href="#">Bookmarks</a>
+            <li class="cd-label">Sort</li>
+            <li>
+                <a href="src/tests/test.html" target="test-content">QuickSort (Int32)</a>
             </li>
-            <li class="images">
-                <a href="#">Images</a>
-            </li>
-            <li class="users">
-                <a href="#">Users</a>
+            <li>
+                <a href="src/tests/test.html" target="test-content">QuickSort (Double)</a>
             </li>
         </ul>
     </nav>
 
     <div class="content-wrapper">
-        <h1>Responsive Sidebar Navigation</h1>
+        <iframe name="test-content"></iframe>
     </div>
 </main>
 

@@ -36,19 +36,13 @@ input[type="search"]::-webkit-search-results-decoration {
     display: none;
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Main Page Content
 
 -------------------------------- */
 .cd-main-content .content-wrapper {
-    padding: 45px 5% 3em;
-}
-
-.cd-main-content .content-wrapper h1 {
-    text-align: center;
-    padding: 3em 0;
-    font-size: 2rem;
+    padding: 20px 5% 3em;
 }
 
 .cd-main-content::before {
@@ -59,14 +53,8 @@ Main Page Content
 
 @media only screen and (min-width: 768px) {
     .cd-main-content .content-wrapper {
-        margin-left: 110px;
+        margin-left: 55px;
         padding-top: 55px;
-    }
-
-    .cd-main-content .content-wrapper h1 {
-        padding: 4em 0;
-        font-size: 3.2rem;
-        font-weight: 300;
     }
 
     .cd-main-content::before {
@@ -76,7 +64,7 @@ Main Page Content
 
 @media only screen and (min-width: 1170px) {
     .cd-main-content .content-wrapper {
-        margin-left: 200px;
+        margin-left: 150px;
     }
 
     .cd-main-content::before {
@@ -84,7 +72,7 @@ Main Page Content
     }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Header
 
@@ -229,7 +217,7 @@ Header
     }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Top Navigation
 
@@ -309,7 +297,7 @@ Top Navigation
     }
 }
 
-/* -------------------------------- 
+/* --------------------------------
 
 Sidebar
 
@@ -397,23 +385,6 @@ Sidebar
     width: 16px;
 }
 
-.cd-side-nav .action-btn a {
-    display: block;
-    margin: 0 5%;
-    padding: 1em 0;
-    background-color: #1784c7;
-    border-radius: .25em;
-    border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    text-align: center;
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.cd-side-nav .action-btn a::before {
-    display: none;
-}
-
 @media only screen and (min-width: 768px) {
     .cd-side-nav {
         position: relative;
@@ -453,7 +424,7 @@ Sidebar
     }
 
     .cd-side-nav > ul > li > a {
-        padding: calc(2.2em + 24px) 0 2.4em;
+        padding: calc(2.2em + 14px) 0 2.4em;
     }
 
     .cd-side-nav > ul > li > a::before {
@@ -472,10 +443,6 @@ Sidebar
         box-shadow: inset 3px 0 0 #1784c7;
         background-color: #33383e;
     }
-
-    .cd-side-nav .action-btn a {
-        margin: 1em 10% 0;
-    }
 }
 
 @media only screen and (min-width: 1170px) {
@@ -492,7 +459,7 @@ Sidebar
     }
 
     .cd-side-nav > ul > li > a {
-        padding: 1em 1em 1em 42px;
+        padding: 1em 1em 1em 22px;
         text-align: left;
         border-bottom: none;
     }
@@ -512,16 +479,35 @@ Sidebar
         display: block;
         padding: 1em 18px;
     }
+}
 
-    .cd-side-nav .action-btn {
-        text-align: left;
+/* --------------------------------
+
+Content
+
+-------------------------------- */
+
+iframe {
+    margin-top: 10%;
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    border: 1px solid;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1170px) {
+    iframe {
+        margin-top: 1%;
+        margin-left: 3%;
+        width: 80%;
+        height: 88%;
     }
+}
 
-    .cd-side-nav .action-btn a {
-        margin: 0 18px;
-    }
-
-    .no-touch .cd-side-nav .action-btn a:hover {
-        background-color: #1a93de;
+@media only screen and (min-width: 1170px) {
+    iframe {
+        margin-top: 2%;
+        width: 83%;
+        height: 85%;
     }
 }
