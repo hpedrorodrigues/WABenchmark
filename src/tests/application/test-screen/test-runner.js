@@ -134,5 +134,8 @@ const Runner = {
     },
     runBubbleSort: (functions, value) => {
         GenericRunner.runSortWithSize(functions, value);
+    },
+    runInsertionSort: (functions, value) => {
+        GenericRunner.runSortWithSize(functions, value);
     }
 };

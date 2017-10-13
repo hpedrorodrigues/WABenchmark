@@ -114,6 +114,8 @@ const Benchmark = {
                         Runner.runShellSort(functions, value);
                     } else if (type === TestTypes.BS) {
                         Runner.runBubbleSort(functions, value);
+                    } else if (type === TestTypes.IS) {
+                        Runner.runInsertionSort(functions, value);
                     } else if (type === TestTypes.FIB) {
                         Runner.runFibonacci(functions, value);
                     } else {

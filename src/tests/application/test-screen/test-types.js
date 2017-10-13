@@ -111,6 +111,20 @@ const TestTypes = {
         },
         values: [10, 100, 1000, 10000, 100000]
     },
+    IS: {
+        type: 'is',
+        name: 'InsertionSort',
+        term: 'Size',
+        file: {
+            js: 'insertionsort/InsertionSort.js',
+            c: 'insertionsort/InsertionSort.c',
+            wasm: 'insertionsort/InsertionSort_generated.wasm'
+        },
+        wrap: {
+            name: 'insertionSort'
+        },
+        values: [10, 100, 1000, 10000, 100000]
+    },
     find: function (type) {
         return Object.keys(this).map(key => this[key]).filter(o => o.type === type).reduce((a, b) => b);
     }
