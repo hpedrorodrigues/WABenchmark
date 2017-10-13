@@ -16,6 +16,8 @@ Simple comparison between WebAssembly and Javascript.
 - ShellSort
 - BubbleSort
 - QuickSort
+- InsertionSort
+- SelectionSort
 
 **General**
 
