@@ -15,15 +15,7 @@ jQuery(document).ready(function () {
         }
     });
 
-    let scrolling = false;
     checkScrollbarPosition();
-    $(window).on('scroll', function () {
-        if (!scrolling) {
-            window.requestAnimationFrame
-                ? window.requestAnimationFrame(checkScrollbarPosition) : setTimeout(checkScrollbarPosition, 300);
-            scrolling = true;
-        }
-    });
 
     sidebarTrigger.on('click', function (event) {
         event.preventDefault();
@@ -86,7 +78,5 @@ jQuery(document).ready(function () {
             ((scrollTop + windowHeight > sidebarHeight) && (mainContentHeight - sidebarHeight !== 0))
                 ? sidebar.addClass('is-fixed').css('bottom', 0) : sidebar.removeClass('is-fixed').attr('style', '');
         }
-
-        scrolling = false;
     }
 });
