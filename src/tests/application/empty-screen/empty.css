@@ -10,7 +10,7 @@ body {
 }
 
 .message {
-    padding: 5em;
+    padding: 8em 0 0 0;
     margin: 0;
     border: 0;
     color: #3e454c;
