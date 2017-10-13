@@ -6,10 +6,8 @@ node_modules
 ### File
 
 *.iml
-*.wasm
 *.wast
 *.map
-*_generated.js
 package-lock.json
 yarn.lock
 npm-debug.log
