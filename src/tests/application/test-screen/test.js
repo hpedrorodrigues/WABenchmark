@@ -98,8 +98,12 @@ const Benchmark = {
         ]).then((methods) => {
             const functions = methods.reduce((a, b) => Object.assign(a, b), {});
 
+            DOMUtil.setStatus('Running tests...');
+
             type.values.forEach(value => {
                 setTimeout(() => {
+                    DOMUtil.setStatus(`Running tests... (Value: ${value})`);
+
                     if (type === TestTypes.A2V) {
                         Runner.runAddTwoVectors(functions, value);
                     } else if (type === TestTypes.S2V) {
@@ -123,7 +127,7 @@ const Benchmark = {
                     } else {
                         console.log('Invalid type!', type);
                     }
-                }, 500);
+                }, 1000);
             });
         }).catch(console.log);
     }
