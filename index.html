@@ -24,46 +24,58 @@
         <ul>
             <li class="cd-label">Math</li>
             <li>
-                <a href="src/tests/test.html" target="test-content">Add 2 vectors (Int32)</a>
+                <a href="src/tests/index.html?algorithm=a2v" target="test-content">
+                    Add (2 vectors)
+                </a>
             </li>
             <li>
-                <a href="src/tests/test.html" target="test-content">Add 2 vectors (Int64)</a>
+                <a href="src/tests/index.html?algorithm=s2v" target="test-content">
+                    Subtract (2 vectors)
+                </a>
             </li>
             <li>
-                <a href="src/tests/test.html" target="test-content">Add 2 vectors (Double)</a>
+                <a href="src/tests/index.html?algorithm=m2v" target="test-content">
+                    Multiply (2 vectors)
+                </a>
             </li>
             <li>
-                <a href="src/tests/test.html" target="test-content">Multiply 2 vectors (Int32)</a>
+                <a href="src/tests/index.html?algorithm=d2v" target="test-content">
+                    Divide (2 vectors)
+                </a>
             </li>
             <li>
-                <a href="src/tests/test.html" target="test-content">Multiply 2 vectors (Int64)</a>
-            </li>
-            <li>
-                <a href="src/tests/test.html" target="test-content">Multiply 2 vectors (Double)</a>
-            </li>
-            <li>
-                <a href="src/tests/test.html" target="test-content">Fibonacci</a>
+                <a href="src/tests/index.html?algorithm=fib" target="test-content">
+                    Fibonacci
+                </a>
             </li>
         </ul>
         <ul>
             <li class="cd-label">Sort</li>
             <li>
-                <a href="src/tests/test.html" target="test-content">QuickSort (Int32)</a>
+                <a href="src/tests/index.html?algorithm=qs" target="test-content">
+                    QuickSort
+                </a>
             </li>
             <li>
-                <a href="src/tests/test.html" target="test-content">QuickSort (Double)</a>
+                <a href="src/tests/index.html?algorithm=shs" target="test-content">
+                    ShellSort
+                </a>
+            </li>
+            <li>
+                <a href="src/tests/index.html?algorithm=bs" target="test-content">
+                    BubbleSort
+                </a>
             </li>
         </ul>
     </nav>
 
     <div class="content-wrapper">
-        <iframe name="test-content"></iframe>
+        <iframe name="test-content" src="src/tests/application/empty-screen/empty.html"></iframe>
     </div>
 </main>
 
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/jquery-menu-aim/jquery.menu-aim.js"></script>
-<script src="node_modules/modernizr/src/Modernizr.js"></script>
 <script src="src/application/js/main.js"></script>
 
 </body>

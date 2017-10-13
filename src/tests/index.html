@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="application/test-screen/test.css">
+</head>
+
+<body>
+
+<div class="header-content">
+    <div class="cd-nugget-info">
+        <button id="run">Run</button>
+    </div>
+    <div class="title">Title</div>
+    <div class="status">...</div>
+</div>
+<div class="content">
+    <table id="report">
+        <caption>Report</caption>
+        <tr>
+            <th class="size-column">Size</th>
+            <th>Javascript</th>
+            <th>WebAssembly</th>
+        </tr>
+    </table>
+    <table id="code">
+        <caption>Code</caption>
+        <tr>
+            <th>Javascript (ms)</th>
+            <th>WebAssembly - C (ms)</th>
+        </tr>
+        <tr>
+            <td id="javascript-code" class="no-indent"></td>
+            <td id="c-code" class="no-indent"></td>
+        </tr>
+    </table>
+</div>
+
+<script src="application/test-screen/test-types.js"></script>
+<script src="application/test-screen/test-runner.js"></script>
+<script src="application/test-screen/test.js"></script>
+</body>
+
+</html>

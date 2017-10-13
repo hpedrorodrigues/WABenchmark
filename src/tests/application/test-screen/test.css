@@ -1,0 +1,77 @@
+html {
+    font-size: 62.5%;
+    overflow-y: scroll;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: "Open Sans", sans-serif;
+    color: #3e454c;
+    background-color: #ffffff;
+}
+
+.header-content {
+    position: relative;
+}
+
+.cd-nugget-info button {
+    background-color: #1784c7;
+    border: .1rem solid #1784c7;
+    border-radius: .4em;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    height: 3.5rem;
+    width: 12rem;
+    letter-spacing: .1rem;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 15px;
+    font-weight: 700;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+    position: absolute;
+}
+
+.cd-nugget-info button:hover {
+    background-color: #3e454c;
+    border-color: #3e454c;
+    color: #fff;
+    outline: 0;
+}
+
+.title {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: #3e454c;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 100px;
+}
+
+table caption {
+    font-family: arial, sans-serif;
+    margin-bottom: 10px;
+    color: #3e454c;
+    font-weight: bold;
+}
+
+td:not(.no-indent), th:not(.no-indent) {
+    border: 1px solid #3e454c;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #3e454c;
+    color: #fff;
+}

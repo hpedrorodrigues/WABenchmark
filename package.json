@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "Simple WebAssembly vs JavaScript benchmark",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "source scripts/compile_all.sh",
+    "server": "source scripts/run.sh",
+    "cleanup": "source scripts/clean_up.sh",
+    "all": "npm run cleanup;npm run compile; npm run server"
   },
   "author": "Pedro Rodrigues <hs.pedro.rodrigues@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "jquery": "^3.2.1",
-    "jquery-menu-aim": "^1.1.0",
-    "modernizr": "^3.5.0"
+    "jquery-menu-aim": "^1.1.0"
   }
 }
