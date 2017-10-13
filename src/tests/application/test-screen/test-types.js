@@ -125,6 +125,20 @@ const TestTypes = {
         },
         values: [10, 100, 1000, 10000, 100000]
     },
+    SES: {
+        type: 'ses',
+        name: 'SelectionSort',
+        term: 'Size',
+        file: {
+            js: 'selectionsort/SelectionSort.js',
+            c: 'selectionsort/SelectionSort.c',
+            wasm: 'selectionsort/SelectionSort_generated.wasm'
+        },
+        wrap: {
+            name: 'selectionSort'
+        },
+        values: [10, 100, 1000, 10000, 100000]
+    },
     find: function (type) {
         return Object.keys(this).map(key => this[key]).filter(o => o.type === type).reduce((a, b) => b);
     }

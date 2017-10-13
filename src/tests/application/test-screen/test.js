@@ -93,7 +93,7 @@ const Benchmark = {
         DOMUtil.setStatus('Downloading files...');
 
         Promise.all([
-            ModuleLoader.loadByType(type).then(instance => ({wasm: instance.exports[`_${type.wrap.name}`]})),
+            ModuleLoader.loadByType(type).then(instance => ({instance, wasm: instance.exports[`_${type.wrap.name}`]})),
             BenchmarkUtil.loadJSFile(type.file.js, type.wrap.name).then(method => ({js: method}))
         ]).then((methods) => {
             const functions = methods.reduce((a, b) => Object.assign(a, b), {});
@@ -116,6 +116,8 @@ const Benchmark = {
                         Runner.runBubbleSort(functions, value);
                     } else if (type === TestTypes.IS) {
                         Runner.runInsertionSort(functions, value);
+                    } else if (type === TestTypes.SES) {
+                        Runner.runSelectionSort(functions, value);
                     } else if (type === TestTypes.FIB) {
                         Runner.runFibonacci(functions, value);
                     } else {

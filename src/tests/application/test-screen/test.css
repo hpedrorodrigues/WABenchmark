@@ -46,9 +46,9 @@ body {
     margin: 0;
     border: 0;
     color: #3e454c;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: bold;
-    text-align: center;
+    text-align: end;
 }
 
 table {
