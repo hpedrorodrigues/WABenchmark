@@ -7,6 +7,44 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="application/test-screen/test.css">
+
+    <script src="application/test-screen/test-types.js"></script>
+    <script>
+        function loadJSFile(url, functionName) {
+            return new Promise(function (resolve, reject) {
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+
+                script.onload = function () {
+                    resolve(window[functionName]);
+                };
+
+                script.onerror = function () {
+                    reject();
+                };
+
+                script.src = url;
+                document.getElementsByTagName('head')[0].appendChild(script);
+            });
+        }
+
+        const type = TestTypes.find(window.location.search.replace('?', '').split('=')[1]);
+        const generatedJS = type.file.wasm.replace('wasm', 'js');
+        let module = {};
+
+        console.log(`Loading module from "${generatedJS}"...`);
+        loadJSFile(generatedJS, 'Module').then(() => {
+            console.log('Module retrieved...');
+            return fetch(type.file.wasm)
+                .then(response => response.arrayBuffer())
+                .then(buffer => new Uint8Array(buffer))
+                .then(binary => {
+                    console.log('Loading module with binary...');
+                    module = Module({wasmBinary: binary});
+                    console.log('Module loaded...', module);
+                });
+        });
+    </script>
 </head>
 
 <body>
@@ -25,6 +63,7 @@
             <th class="size-column">Size</th>
             <th>Javascript (ms)</th>
             <th>WebAssembly (ms)</th>
+            <th>Ratio (ms)</th>
         </tr>
     </table>
     <table id="code">
@@ -40,7 +79,6 @@
     </table>
 </div>
 
-<script src="application/test-screen/test-types.js"></script>
 <script src="application/test-screen/test-runner.js"></script>
 <script src="application/test-screen/test.js"></script>
 </body>

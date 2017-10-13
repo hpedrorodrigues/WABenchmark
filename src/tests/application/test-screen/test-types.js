@@ -9,9 +9,11 @@ const TestTypes = {
             wasm: 'add-two-vectors/AddTwoVectors_generated.wasm'
         },
         wrap: {
-            name: 'addTwoVectors'
+            name: 'addTwoVectors',
+            returnType: null,
+            argumentTypes: ['number', 'number', 'number', 'number']
         },
-        values: [10, 100, 1000, 10000]
+        values: [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576]
     },
     S2V: {
         type: 's2v',
@@ -23,9 +25,11 @@ const TestTypes = {
             wasm: 'subtract-two-vectors/SubtractTwoVectors_generated.wasm'
         },
         wrap: {
-            name: 'subtractTwoVectors'
+            name: 'subtractTwoVectors',
+            returnType: null,
+            argumentTypes: ['number', 'number', 'number', 'number']
         },
-        values: [10, 100, 1000, 10000]
+        values: [2, 4, 8, 16]
     },
     M2V: {
         type: 'm2v',
@@ -37,9 +41,11 @@ const TestTypes = {
             wasm: 'multiply-two-vectors/MultiplyTwoVectors_generated.wasm'
         },
         wrap: {
-            name: 'multiplyTwoVectors'
+            name: 'multiplyTwoVectors',
+            returnType: null,
+            argumentTypes: ['number', 'number', 'number', 'number']
         },
-        values: [10, 100, 1000]
+        values: [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576]
     },
     D2V: {
         type: 'd2v',
@@ -51,9 +57,11 @@ const TestTypes = {
             wasm: 'divide-two-vectors/DivideTwoVectors_generated.wasm'
         },
         wrap: {
-            name: 'divideTwoVectors'
+            name: 'divideTwoVectors',
+            returnType: null,
+            argumentTypes: ['number', 'number', 'number', 'number']
         },
-        values: [10, 100]
+        values: [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288, 1048576]
     },
     FIB: {
         type: 'fib',
@@ -65,7 +73,9 @@ const TestTypes = {
             wasm: 'fibonacci/Fibonacci_generated.wasm'
         },
         wrap: {
-            name: 'fibonacci'
+            name: 'fibonacci',
+            returnType: 'number',
+            argumentTypes: ['number']
         },
         values: [5, 10, 15, 20, 25, 30, 35, 40, 45]
     },
@@ -79,9 +89,11 @@ const TestTypes = {
             wasm: 'quicksort/QuickSort_generated.wasm'
         },
         wrap: {
-            name: 'quickSort'
+            name: 'quickSort',
+            returnType: null,
+            argumentTypes: ['number', 'number', 'number']
         },
-        values: [10, 100, 1000, 10000, 100000]
+        values: [10, 100, 1000, 10000, 100000, 1000000, 10000000]
     },
     SHS: {
         type: 'shs',
@@ -93,9 +105,11 @@ const TestTypes = {
             wasm: 'shellsort/ShellSort_generated.wasm'
         },
         wrap: {
-            name: 'shellSort'
+            name: 'shellSort',
+            returnType: null,
+            argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000, 10000, 100000]
+        values: [10, 100, 1000]
     },
     BS: {
         type: 'bs',
@@ -107,9 +121,11 @@ const TestTypes = {
             wasm: 'bubblesort/BubbleSort_generated.wasm'
         },
         wrap: {
-            name: 'bubbleSort'
+            name: 'bubbleSort',
+            returnType: null,
+            argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000, 10000, 100000]
+        values: [10, 100, 1000]
     },
     IS: {
         type: 'is',
@@ -121,9 +137,11 @@ const TestTypes = {
             wasm: 'insertionsort/InsertionSort_generated.wasm'
         },
         wrap: {
-            name: 'insertionSort'
+            name: 'insertionSort',
+            returnType: null,
+            argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000, 10000, 100000]
+        values: [10, 100, 1000]
     },
     SES: {
         type: 'ses',
@@ -135,9 +153,11 @@ const TestTypes = {
             wasm: 'selectionsort/SelectionSort_generated.wasm'
         },
         wrap: {
-            name: 'selectionSort'
+            name: 'selectionSort',
+            returnType: null,
+            argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000, 10000, 100000]
+        values: [10, 100, 1000]
     },
     find: function (type) {
         return Object.keys(this).map(key => this[key]).filter(o => o.type === type).reduce((a, b) => b);

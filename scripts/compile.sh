@@ -10,7 +10,6 @@ emcc "${filename}.c" \
   -s WASM=1 \
   -s MODULARIZE=1 \
   -s DEMANGLE_SUPPORT=1 \
-  -s SIDE_MODULE=1 \
   -s ALLOW_MEMORY_GROWTH=1 \
   -s "EXPORTED_FUNCTIONS=['$exported_function_name']" \
   --emrun \

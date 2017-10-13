@@ -1,36 +1,3 @@
-const ModuleLoader = {
-    loadByType: (type) => {
-        return fetch(type.file.wasm)
-            .then(response => response.arrayBuffer())
-            .then(buffer => WebAssembly.compile(buffer))
-            .then(module => {
-                const imports = {
-                    env: {
-                        memoryBase: 0,
-                        tableBase: 0,
-                        memory: new WebAssembly.Memory({
-                            initial: 256
-                        }),
-                        table: new WebAssembly.Table({
-                            initial: 0,
-                            element: 'anyfunc'
-                        }),
-                        _printf: (message) => {
-                            console.log("Message", message);
-                        },
-                        _malloc: (bytes) => {
-                            return new Int32Array(bytes);
-                        },
-                        _free: () => {
-                        }
-                    }
-                };
-
-                return new WebAssembly.instantiate(module, imports);
-            });
-    }
-};
-
 const BenchmarkUtil = {
     loadType: () => TestTypes.find(BenchmarkUtil.loadTypeTextByUrl()),
     loadTypeTextByUrl: () => {
@@ -53,22 +20,17 @@ const BenchmarkUtil = {
         });
     },
     loadJSFile: (url, functionName) => {
-        return new Promise((resolve, reject) => {
+        return new Promise(function (resolve, reject) {
             const script = document.createElement('script');
             script.type = 'text/javascript';
 
-            if (script.readyState) {
-                script.onreadystatechange = function () {
-                    if (script.readyState === 'loaded' || script.readyState === 'complete') {
-                        script.onreadystatechange = null;
-                        resolve(window[functionName]);
-                    }
-                }
-            } else {
-                script.onload = function () {
-                    resolve(window[functionName]);
-                }
-            }
+            script.onload = function () {
+                resolve(window[functionName]);
+            };
+
+            script.onerror = function () {
+                reject();
+            };
 
             script.src = url;
             document.getElementsByTagName('head')[0].appendChild(script);
@@ -92,44 +54,48 @@ const Benchmark = {
 
         DOMUtil.setStatus('Downloading files...');
 
-        Promise.all([
-            ModuleLoader.loadByType(type).then(instance => ({instance, wasm: instance.exports[`_${type.wrap.name}`]})),
-            BenchmarkUtil.loadJSFile(type.file.js, type.wrap.name).then(method => ({js: method}))
-        ]).then((methods) => {
-            const functions = methods.reduce((a, b) => Object.assign(a, b), {});
+        BenchmarkUtil
+            .loadJSFile(type.file.js, type.wrap.name)
+            .then(method => ({js: method}))
+            .then((methods) => {
+                const functions = {
+                    js: methods.js,
+                    wasm: module.cwrap(type.wrap.name, type.wrap.returnType, type.wrap.argumentTypes),
+                    module: module
+                };
 
-            DOMUtil.setStatus('Running tests...');
+                DOMUtil.setStatus('Running tests...');
 
-            type.values.forEach(value => {
-                setTimeout(() => {
-                    DOMUtil.setStatus(`Running tests... (Value: ${value})`);
+                type.values.forEach(value => {
+                    setTimeout(() => {
+                        DOMUtil.setStatus(`Running tests... (Value: ${value})`);
 
-                    if (type === TestTypes.A2V) {
-                        Runner.runAddTwoVectors(functions, value);
-                    } else if (type === TestTypes.S2V) {
-                        Runner.runSubtractTwoVectors(functions, value);
-                    } else if (type === TestTypes.M2V) {
-                        Runner.runMultiplyTwoVectors(functions, value);
-                    } else if (type === TestTypes.D2V) {
-                        Runner.runDivideTwoVectors(functions, value);
-                    } else if (type === TestTypes.QS) {
-                        Runner.runQuickSort(functions, value);
-                    } else if (type === TestTypes.SHS) {
-                        Runner.runShellSort(functions, value);
-                    } else if (type === TestTypes.BS) {
-                        Runner.runBubbleSort(functions, value);
-                    } else if (type === TestTypes.IS) {
-                        Runner.runInsertionSort(functions, value);
-                    } else if (type === TestTypes.SES) {
-                        Runner.runSelectionSort(functions, value);
-                    } else if (type === TestTypes.FIB) {
-                        Runner.runFibonacci(functions, value);
-                    } else {
-                        console.log('Invalid type!', type);
-                    }
-                }, 1000);
-            });
-        }).catch(console.log);
+                        if (type === TestTypes.A2V) {
+                            Runner.runAddTwoVectors(functions, value);
+                        } else if (type === TestTypes.S2V) {
+                            Runner.runSubtractTwoVectors(functions, value);
+                        } else if (type === TestTypes.M2V) {
+                            Runner.runMultiplyTwoVectors(functions, value);
+                        } else if (type === TestTypes.D2V) {
+                            Runner.runDivideTwoVectors(functions, value);
+                        } else if (type === TestTypes.QS) {
+                            Runner.runQuickSort(functions, value);
+                        } else if (type === TestTypes.SHS) {
+                            Runner.runShellSort(functions, value);
+                        } else if (type === TestTypes.BS) {
+                            Runner.runBubbleSort(functions, value);
+                        } else if (type === TestTypes.IS) {
+                            Runner.runInsertionSort(functions, value);
+                        } else if (type === TestTypes.SES) {
+                            Runner.runSelectionSort(functions, value);
+                        } else if (type === TestTypes.FIB) {
+                            Runner.runFibonacci(functions, value);
+                        } else {
+                            console.log('Invalid type!', type);
+                        }
+                    }, 1000);
+                });
+            }).catch(console.log);
     }
 };
 

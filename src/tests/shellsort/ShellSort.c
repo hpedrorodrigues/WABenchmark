@@ -1,4 +1,4 @@
-void shellSort(int *array, int n) {
+void shellSort(double *array, int n) {
   int h = 1;
 
   while (h <= n / 3) {
@@ -7,7 +7,7 @@ void shellSort(int *array, int n) {
 
   while (h > 0) {
     for (int i = h; i < n; i++) {
-      int aux = array[i];
+      double aux = array[i];
       int j = i;
 
       while (j > h - 1 && array[j - h] >= aux) {

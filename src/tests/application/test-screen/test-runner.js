@@ -1,16 +1,37 @@
 const GenericRunner = {
     runMathWithTwoVectors: (functions, value) => {
         DOMUtil.setStatus(`Generating arrays... (Value: ${value})`);
-        const a = new Float64Array(value), b = new Float64Array(value);
-        const waArrayResult = new Float64Array(value), jsArrayResult = new Float64Array(value);
+        const a = new Float64Array(value)
+            , b = new Float64Array(value)
+            , waArrayResult = new Float64Array(value)
+            , jsArrayResult = new Float64Array(value);
+
         for (let i = 0; i < value; i++) {
             a[i] = Math.random() * 20000 - 10000;
-            b[i] = Math.random() * 20000 - 10000;
+            b[i] = Math.random() * 2000 - 1000;
             waArrayResult[i] = jsArrayResult[i] = 0;
         }
 
+        const bytes = 8;
+
+        const pointerA = functions.module._malloc(a.length * bytes);
+        const pointerB = functions.module._malloc(b.length * bytes);
+        const pointerWAResult = functions.module._malloc(waArrayResult.length * bytes);
+
+        const offsetA = pointerA / bytes;
+        const offsetB = pointerB / bytes;
+        const offsetWAResult = pointerWAResult / bytes;
+
+        functions.module.HEAPF64.set(a, offsetA);
+        functions.module.HEAPF64.set(b, offsetB);
+
         DOMUtil.setStatus(`Running WA test... (Value: ${value})`);
-        const waResponse = Benchmark.run(() => functions.wasm(a, b, waArrayResult, value));
+        const waResponse = Benchmark.run(() => functions.wasm(pointerA, pointerB, pointerWAResult, value));
+
+        waArrayResult.set(functions.module.HEAPF64.subarray(offsetWAResult, offsetWAResult + value));
+        functions.module._free(pointerA);
+        functions.module._free(pointerB);
+        functions.module._free(pointerWAResult);
 
         DOMUtil.setStatus(`Running JS test... (Value: ${value})`);
         const jsResponse = Benchmark.run(() => functions.js(a, b, jsArrayResult, value));
@@ -26,7 +47,11 @@ const GenericRunner = {
             return;
         }
 
-        DOMUtil.insertTableRow({size: value, jsTime: jsResponse.time, waTime: waResponse.time});
+        const jsTime = jsResponse.time;
+        const waTime = waResponse.time;
+        const ratio = waTime === '0.00000' ? jsTime : (jsTime / waTime).toFixed(5);
+
+        DOMUtil.insertTableRow({size: value, jsTime, waTime, ratio});
         DOMUtil.setStatus('...');
     },
     runMathWithOneNumber: (functions, value) => {
@@ -47,7 +72,11 @@ const GenericRunner = {
             return;
         }
 
-        DOMUtil.insertTableRow({size: value, jsTime: jsResponse.time, waTime: waResponse.time});
+        const jsTime = jsResponse.time;
+        const waTime = waResponse.time;
+        const ratio = waTime === '0.00000' ? jsTime : (jsTime / waTime).toFixed(5);
+
+        DOMUtil.insertTableRow({size: value, jsTime, waTime, ratio});
         DOMUtil.setStatus('...');
     },
     runSortWithStartEnd: (functions, value) => {
@@ -58,26 +87,40 @@ const GenericRunner = {
             a[i] = b[i] = Math.random() * 20000 - 10000;
         }
 
-        const start = 0, end = value - 1;
+        const start = 0, end = a.length - 1;
+
+        const bytes = 8;
+
+        const pointer = functions.module._malloc(a.length * bytes);
+        const offset = pointer / bytes;
+
+        functions.module.HEAPF64.set(a, offset);
 
         DOMUtil.setStatus(`Running WA test... (Value: ${value})`);
-        const waResponse = Benchmark.run(() => functions.wasm(a, start, end));
+        const waResponse = Benchmark.run(() => functions.wasm(pointer, start, end));
+
+        a.set(functions.module.HEAPF64.subarray(offset, offset + end + 1));
+        functions.module._free(pointer);
 
         DOMUtil.setStatus(`Running JS test... (Value: ${value})`);
         const jsResponse = Benchmark.run(() => functions.js(b, start, end));
 
         console.log('-------------------------------');
         console.log('Value: ', value);
-        console.log('Javascript Response: ', a);
-        console.log('WebAssembly Response: ', b);
+        console.log('Javascript Response: ', b);
+        console.log('WebAssembly Response: ', a);
 
-        if (waResponse.result !== jsResponse.result) {
-            console.log(`ERROR! Different results! JS: ${jsResponse.result}, WA: ${waResponse.result}`);
+        if (a.join(',') !== b.join(',')) {
+            console.log(`ERROR! Different results! JS: ${b.slice(0, 10)}..., WA: ${a.slice(0, 10)}...`);
             DOMUtil.setStatus(`Different test results between WA and JS!`);
             return;
         }
 
-        DOMUtil.insertTableRow({size: value, jsTime: jsResponse.time, waTime: waResponse.time});
+        const jsTime = jsResponse.time;
+        const waTime = waResponse.time;
+        const ratio = waTime === '0.00000' ? jsTime : (jsTime / waTime).toFixed(5);
+
+        DOMUtil.insertTableRow({size: value, jsTime, waTime, ratio});
         DOMUtil.setStatus('...');
     },
     runSortWithSize: (functions, value) => {
@@ -88,24 +131,38 @@ const GenericRunner = {
             a[i] = b[i] = Math.random() * 20000 - 10000;
         }
 
+        const bytes = 8, end = a.length - 1;
+
+        const pointer = functions.module._malloc(a.length * bytes);
+        const offset = pointer / bytes;
+
+        functions.module.HEAPF64.set(a, offset);
+
         DOMUtil.setStatus(`Running WA test... (Value: ${value})`);
-        const waResponse = Benchmark.run(() => functions.wasm(a, value));
+        const waResponse = Benchmark.run(() => functions.wasm(pointer, value));
+
+        a.set(functions.module.HEAPF64.subarray(offset, offset + end + 1));
+        functions.module._free(pointer);
 
         DOMUtil.setStatus(`Running JS test... (Value: ${value})`);
         const jsResponse = Benchmark.run(() => functions.js(b, value));
 
         console.log('-------------------------------');
         console.log('Value: ', value);
-        console.log('Javascript Response: ', a);
-        console.log('WebAssembly Response: ', b);
+        console.log('Javascript Response: ', b);
+        console.log('WebAssembly Response: ', a);
 
-        if (waResponse.result !== jsResponse.result) {
-            console.log(`ERROR! Different results! JS: ${jsResponse.result}, WA: ${waResponse.result}`);
+        if (a.join(',') !== b.join(',')) {
+            console.log(`ERROR! Different results! JS: ${b.slice(0, 10)}..., WA: ${a.slice(0, 10)}...`);
             DOMUtil.setStatus(`Different test results between WA and JS!`);
             return;
         }
 
-        DOMUtil.insertTableRow({size: value, jsTime: jsResponse.time, waTime: waResponse.time});
+        const jsTime = jsResponse.time;
+        const waTime = waResponse.time;
+        const ratio = waTime === '0.00000' ? jsTime : (jsTime / waTime).toFixed(5);
+
+        DOMUtil.insertTableRow({size: value, jsTime, waTime, ratio});
         DOMUtil.setStatus('...');
     }
 };

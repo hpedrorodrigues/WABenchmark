@@ -1,4 +1,4 @@
-void selectionSort(int *array, int n) {
+void selectionSort(double *array, int n) {
   int minPos = 0;
 
   for (int i = 0; i < n - 1; i++) {
@@ -10,7 +10,7 @@ void selectionSort(int *array, int n) {
     }
 
     if (minPos != i) {
-      int aux = array[i];
+      double aux = array[i];
       array[i] = array[minPos];
       array[minPos] = aux;
     }
