@@ -67,33 +67,31 @@ const Benchmark = {
                 DOMUtil.setStatus('Running tests...');
 
                 type.values.forEach(value => {
-                    setTimeout(() => {
-                        DOMUtil.setStatus(`Running tests... (Value: ${value})`);
+                    DOMUtil.setStatus(`Running tests... (Value: ${value})`);
 
-                        if (type === TestTypes.A2V) {
-                            Runner.runAddTwoVectors(functions, value);
-                        } else if (type === TestTypes.S2V) {
-                            Runner.runSubtractTwoVectors(functions, value);
-                        } else if (type === TestTypes.M2V) {
-                            Runner.runMultiplyTwoVectors(functions, value);
-                        } else if (type === TestTypes.D2V) {
-                            Runner.runDivideTwoVectors(functions, value);
-                        } else if (type === TestTypes.QS) {
-                            Runner.runQuickSort(functions, value);
-                        } else if (type === TestTypes.SHS) {
-                            Runner.runShellSort(functions, value);
-                        } else if (type === TestTypes.BS) {
-                            Runner.runBubbleSort(functions, value);
-                        } else if (type === TestTypes.IS) {
-                            Runner.runInsertionSort(functions, value);
-                        } else if (type === TestTypes.SES) {
-                            Runner.runSelectionSort(functions, value);
-                        } else if (type === TestTypes.FIB) {
-                            Runner.runFibonacci(functions, value);
-                        } else {
-                            console.log('Invalid type!', type);
-                        }
-                    }, 1000);
+                    if (type === TestTypes.A2V) {
+                        Runner.runAddTwoVectors(functions, value);
+                    } else if (type === TestTypes.S2V) {
+                        Runner.runSubtractTwoVectors(functions, value);
+                    } else if (type === TestTypes.M2V) {
+                        Runner.runMultiplyTwoVectors(functions, value);
+                    } else if (type === TestTypes.D2V) {
+                        Runner.runDivideTwoVectors(functions, value);
+                    } else if (type === TestTypes.QS) {
+                        Runner.runQuickSort(functions, value);
+                    } else if (type === TestTypes.SHS) {
+                        Runner.runShellSort(functions, value);
+                    } else if (type === TestTypes.BS) {
+                        Runner.runBubbleSort(functions, value);
+                    } else if (type === TestTypes.IS) {
+                        Runner.runInsertionSort(functions, value);
+                    } else if (type === TestTypes.SES) {
+                        Runner.runSelectionSort(functions, value);
+                    } else if (type === TestTypes.FIB) {
+                        Runner.runFibonacci(functions, value);
+                    } else {
+                        console.log('Invalid type!', type);
+                    }
                 });
             }).catch(console.log);
     }

@@ -74,7 +74,7 @@ const GenericRunner = {
         console.log('Javascript Response: ', jsResponse.result);
         console.log('WebAssembly Response: ', waResponse.result);
 
-        if (ArrayUtil.isDifferent(waResponse, jsResponse)) {
+        if (waResponse.result !== jsResponse.result) {
             console.log(`ERROR! Different results! JS: ${jsResponse.result}, WA: ${waResponse.result}`);
             DOMUtil.setStatus(`Different test results between WA and JS!`);
             return;
