@@ -77,7 +77,7 @@ const TestTypes = {
             returnType: 'number',
             argumentTypes: ['number']
         },
-        values: [5, 10, 15, 20, 25, 30, 35, 40, 45]
+        values: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47]
     },
     QS: {
         type: 'qs',
@@ -93,7 +93,7 @@ const TestTypes = {
             returnType: null,
             argumentTypes: ['number', 'number', 'number']
         },
-        values: [10, 100, 1000, 10000, 100000, 1000000, 10000000]
+        values: [10, 100, 1000, 10000, 100000, 1000000, 10000000, 20000000, 30000000]
     },
     SHS: {
         type: 'shs',
@@ -109,7 +109,7 @@ const TestTypes = {
             returnType: null,
             argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000]
+        values: [10, 100, 1000, 2000, 3000, 4000, 5000]
     },
     BS: {
         type: 'bs',
