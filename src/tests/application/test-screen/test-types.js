@@ -77,7 +77,7 @@ const TestTypes = {
             returnType: 'number',
             argumentTypes: ['number']
         },
-        values: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47]
+        values: [5, 10, 15, 20, 25, 30, 35, 40, 45]
     },
     QS: {
         type: 'qs',
@@ -93,7 +93,24 @@ const TestTypes = {
             returnType: null,
             argumentTypes: ['number', 'number', 'number']
         },
-        values: [10, 100, 1000, 10000, 100000, 1000000, 10000000, 20000000, 30000000]
+        values: [
+            10,
+            100,
+            1000,
+            10000,
+            100000,
+            1000000,
+            10000000,
+            20000000,
+            30000000,
+            40000000,
+            50000000,
+            60000000,
+            70000000,
+            80000000,
+            90000000,
+            100000000
+        ]
     },
     SHS: {
         type: 'shs',
@@ -109,7 +126,7 @@ const TestTypes = {
             returnType: null,
             argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000, 2000, 3000, 4000, 5000]
+        values: [10, 100, 1000, 2000, 3000, 4000, 5000, 25000, 50000]
     },
     BS: {
         type: 'bs',
@@ -125,7 +142,7 @@ const TestTypes = {
             returnType: null,
             argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000]
+        values: [10, 100, 1000, 2000, 3000, 4000, 5000]
     },
     IS: {
         type: 'is',
@@ -141,7 +158,7 @@ const TestTypes = {
             returnType: null,
             argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000]
+        values: [10, 100, 1000, 2000, 3000, 4000, 5000]
     },
     SES: {
         type: 'ses',
@@ -157,9 +174,13 @@ const TestTypes = {
             returnType: null,
             argumentTypes: ['number', 'number']
         },
-        values: [10, 100, 1000]
+        values: [10, 100, 1000, 2000, 3000, 4000, 5000]
     },
     find: function (type) {
-        return Object.keys(this).map(key => this[key]).filter(o => o.type === type).reduce((a, b) => b);
+        return Object
+            .keys(this)
+            .map(key => this[key])
+            .filter(o => o.type === type)
+            .reduce((a, b) => b);
     }
 };
