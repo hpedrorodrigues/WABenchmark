@@ -1,3 +1,11 @@
+const ArrayUtil = {
+    isDifferent: (a, b) => (a && !b)
+        || (!a && b)
+        || (!a && !b)
+        || (a.length !== b.length)
+        || a.some((element, index) => element !== b[index])
+};
+
 const GenericRunner = {
     runMathWithTwoVectors: (functions, value) => {
         DOMUtil.setStatus(`Generating arrays... (Value: ${value})`);
@@ -41,7 +49,7 @@ const GenericRunner = {
         console.log('Javascript Response: ', jsArrayResult);
         console.log('WebAssembly Response: ', waArrayResult);
 
-        if (waArrayResult.join(',') !== jsArrayResult.join(',')) {
+        if (ArrayUtil.isDifferent(waArrayResult, jsArrayResult)) {
             console.log(`ERROR! Different results! JS: ${jsArrayResult}, WA: ${waArrayResult}`);
             DOMUtil.setStatus(`Different test results between WA and JS!`);
             return;
@@ -66,7 +74,7 @@ const GenericRunner = {
         console.log('Javascript Response: ', jsResponse.result);
         console.log('WebAssembly Response: ', waResponse.result);
 
-        if (waResponse.result !== jsResponse.result) {
+        if (ArrayUtil.isDifferent(waResponse, jsResponse)) {
             console.log(`ERROR! Different results! JS: ${jsResponse.result}, WA: ${waResponse.result}`);
             DOMUtil.setStatus(`Different test results between WA and JS!`);
             return;
@@ -110,7 +118,7 @@ const GenericRunner = {
         console.log('Javascript Response: ', b);
         console.log('WebAssembly Response: ', a);
 
-        if (a.join(',') !== b.join(',')) {
+        if (ArrayUtil.isDifferent(a, b)) {
             console.log(`ERROR! Different results! JS: ${b.slice(0, 10)}..., WA: ${a.slice(0, 10)}...`);
             DOMUtil.setStatus(`Different test results between WA and JS!`);
             return;
@@ -152,7 +160,7 @@ const GenericRunner = {
         console.log('Javascript Response: ', b);
         console.log('WebAssembly Response: ', a);
 
-        if (a.join(',') !== b.join(',')) {
+        if (ArrayUtil.isDifferent(a, b)) {
             console.log(`ERROR! Different results! JS: ${b.slice(0, 10)}..., WA: ${a.slice(0, 10)}...`);
             DOMUtil.setStatus(`Different test results between WA and JS!`);
             return;
